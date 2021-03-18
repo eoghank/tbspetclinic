@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: petclinicroot
+  name: petclinicroot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: petclinicroot
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: petclinicroot
+    spec:
+      containers:
+      - image: eoghank/tbspetclinic:latest
+        name: petclinicroot
+        imagePullPolicy: Always
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: 0
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred
